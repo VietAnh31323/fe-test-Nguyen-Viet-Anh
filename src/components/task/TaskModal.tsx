@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Modal, Form } from "antd";
 
 import dayjs from "dayjs";
@@ -19,6 +20,17 @@ const TaskModal = ({ open, onClose, editingTask }: Props) => {
   const dispatch = useAppDispatch();
 
   const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (open && editingTask) {
+      form.setFieldsValue({
+        ...editingTask,
+        dueDate: editingTask.dueDate ? dayjs(editingTask.dueDate) : undefined,
+      });
+    } else {
+      form.resetFields();
+    }
+  }, [open, editingTask, form]);
 
   const handleSubmit = async () => {
     try {
@@ -63,12 +75,11 @@ const TaskModal = ({ open, onClose, editingTask }: Props) => {
   return (
     <Modal
       open={open}
-      title={editingTask ? "Edit Task" : "Add Task"}
+      title={editingTask ? "Chỉnh sửa Task" : "Thêm Task"}
       onCancel={onClose}
       onOk={handleSubmit}
-      destroyOnClose
     >
-      <TaskForm form={form} initialValues={editingTask} />
+      <TaskForm form={form} />
     </Modal>
   );
 };

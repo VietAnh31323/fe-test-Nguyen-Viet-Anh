@@ -1,9 +1,9 @@
 import { DatePicker } from "antd";
 import type { RangePickerProps } from "antd/es/date-picker";
 import dayjs from "dayjs";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { setFilter } from "../../features/tasks/tasksSlice";
-import { selectFilters } from "../../features/tasks/selectors";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { setFilter } from "../../../features/tasks/tasksSlice";
+import { selectFilters } from "../../../features/tasks/selectors";
 
 const { RangePicker } = DatePicker;
 
@@ -33,7 +33,9 @@ const DateRangeFilter = () => {
     );
   };
 
-  return <RangePicker value={value} onChange={handleChange} className="w-full" />;
+  return (
+    <RangePicker value={value} onChange={handleChange} className="w-full" />
+  );
 };
 
 export default DateRangeFilter;

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Button, Card } from "antd";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
@@ -11,7 +11,7 @@ import type { Task } from "../../types/types";
 import { deleteManyTasks } from "../../features/tasks/tasksSlice";
 import TaskTable from "../../components/task/TaskTable";
 import TaskModal from "../../components/task/TaskModal";
-import TaskFilters from "../../components/task/TaskFilters";
+import TaskFilters from "../../components/task/filters/TaskFilters";
 
 const TasksPage = () => {
   const dispatch = useAppDispatch();
@@ -22,8 +22,14 @@ const TasksPage = () => {
 
   const pagination = useAppSelector(selectPagination);
 
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedRowKeys, setSelectedRowKeys] = useState<React.Key[]>([]);
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    const t = setTimeout(() => setIsLoading(false), 1200);
+    return () => clearTimeout(t);
+  }, []);
 
   const [editingTask, setEditingTask] = useState<Task | null>(null);
 
@@ -77,6 +83,7 @@ const TasksPage = () => {
         onEdit={handleEdit}
         selectedRowKeys={selectedRowKeys}
         onSelectChange={setSelectedRowKeys}
+        loading={isLoading}
       />
 
       <TaskModal

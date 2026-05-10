@@ -1,7 +1,7 @@
 import { Input } from "antd";
-import { setFilter } from "../../features/tasks/tasksSlice";
-import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { selectFilters } from "../../features/tasks/selectors";
+import { setFilter } from "../../../features/tasks/tasksSlice";
+import { useAppDispatch, useAppSelector } from "../../../hooks/redux";
+import { selectFilters } from "../../../features/tasks/selectors";
 
 const SearchFilter = () => {
   const dispatch = useAppDispatch();

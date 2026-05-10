@@ -1,51 +1,41 @@
 import { Form, Input, Select, DatePicker, type FormInstance } from "antd";
 
-import dayjs from "dayjs";
-import type { Task } from "../../types/types";
 import { PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from "../../utils/task";
 
 interface Props {
   form: FormInstance;
-  initialValues?: Task | null;
 }
 
-const TaskForm = ({ form, initialValues }: Props) => {
+const TaskForm = ({ form }: Props) => {
   return (
     <Form
       form={form}
       layout="vertical"
-      initialValues={{
-        ...initialValues,
-
-        dueDate: initialValues?.dueDate
-          ? dayjs(initialValues.dueDate)
-          : undefined,
-      }}
     >
       <Form.Item
-        label="Title"
+        label="Tiêu đề"
         name="title"
         rules={[
           {
             required: true,
-            message: "Please input title",
+            message: "Xin vui lòng nhập tiêu đề",
           },
         ]}
       >
         <Input placeholder="Enter title" />
       </Form.Item>
 
-      <Form.Item label="Description" name="description">
+      <Form.Item label="Mô tả" name="description">
         <Input.TextArea rows={4} placeholder="Enter description" />
       </Form.Item>
 
       <Form.Item
-        label="Status"
+        label="Trạng thái"
         name="status"
         rules={[
           {
             required: true,
-            message: "Please select status",
+            message: "Xin vui lòng chọn trạng thái",
           },
         ]}
       >
@@ -53,28 +43,28 @@ const TaskForm = ({ form, initialValues }: Props) => {
       </Form.Item>
 
       <Form.Item
-        label="Priority"
+        label="Mức độ ưu tiên"
         name="priority"
         rules={[
           {
             required: true,
-            message: "Please select priority",
+            message: "Xin vui lòng chọn mức độ ưu tiên",
           },
         ]}
       >
         <Select options={PRIORITY_OPTIONS} />
       </Form.Item>
 
-      <Form.Item label="Assignee" name="assignee">
-        <Input placeholder="Enter assignee" />
+      <Form.Item label="Người được giao" name="assignee">
+        <Input placeholder="Nhập người được giao" />
       </Form.Item>
 
-      <Form.Item label="Due Date" name="dueDate">
+      <Form.Item label="Hạn chót" name="dueDate">
         <DatePicker className="w-full" />
       </Form.Item>
 
       <Form.Item label="Tags" name="tags">
-        <Select mode="tags" placeholder="Enter tags" />
+        <Select mode="tags" placeholder="Nhập tags" />
       </Form.Item>
     </Form>
   );

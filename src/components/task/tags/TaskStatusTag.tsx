@@ -1,6 +1,6 @@
 import { Tag } from "antd";
-import { getStatusColor } from "../../utils/task";
-import { formatStatus } from "../../utils/format";
+import { getStatusColor } from "../../../utils/task";
+import { formatStatus } from "../../../utils/format";
 
 interface Props {
   status: string;

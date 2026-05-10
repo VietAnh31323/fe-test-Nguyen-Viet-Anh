@@ -1,11 +1,12 @@
 import { Button, Card } from "antd";
 
 import SearchFilter from "./SearchFilter";
+
+import { useAppDispatch } from "../../../hooks/redux";
+import { resetFilters } from "../../../features/tasks/tasksSlice";
 import StatusFilter from "./StatusFilter";
 import PriorityFilter from "./PriorityFilter";
 import DateRangeFilter from "./DateRangeFilter";
-import { useAppDispatch } from "../../hooks/redux";
-import { resetFilters } from "../../features/tasks/tasksSlice";
 
 const TaskFilters = () => {
   const dispatch = useAppDispatch();

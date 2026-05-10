@@ -9,7 +9,7 @@ import type { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 
 import TaskActions from "./TaskActions";
-import TaskPriorityTag from "./TaskPriorityTag";
+import TaskPriorityTag from "./tags/TaskPriorityTag";
 import TaskStatusSelect from "./TaskStatusSelect";
 import { deleteTask, setPage } from "../../features/tasks/tasksSlice";
 import { useAppDispatch } from "../../hooks/redux";
@@ -23,6 +23,7 @@ interface Props {
   onEdit: (task: Task) => void;
   selectedRowKeys: React.Key[];
   onSelectChange: (selectedKeys: React.Key[]) => void;
+  loading?: boolean;
 }
 
 const TaskTable = ({
@@ -33,6 +34,7 @@ const TaskTable = ({
   onEdit,
   selectedRowKeys,
   onSelectChange,
+  loading = false,
 }: Props) => {
   const dispatch = useAppDispatch();
 
@@ -149,11 +151,11 @@ const TaskTable = ({
       dataSource={data}
       size="middle"
       scroll={{ x: 980 }}
+      loading={loading}
       rowSelection={{
         selectedRowKeys,
         onChange: onSelectChange,
       }}
-      rowClassName={(_, index) => (index % 2 !== 0 ? "bg-gray-50" : "")}
       pagination={{
         current: currentPage,
         pageSize,

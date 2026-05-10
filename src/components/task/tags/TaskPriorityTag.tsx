@@ -1,5 +1,5 @@
 import { Tag } from "antd";
-import { getPriorityColor } from "../../utils/task";
+import { getPriorityColor } from "../../../utils/task";
 
 interface Props {
   priority: string;
