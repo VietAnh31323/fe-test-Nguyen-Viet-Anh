@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { ConfigProvider, Layout, Menu } from "antd";
 import {
   AppstoreOutlined,
   CheckSquareOutlined,
@@ -17,7 +17,8 @@ const MainLayout = () => {
       <Sider
         width={220}
         style={{
-          background: "linear-gradient(180deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%)",
+          background:
+            "linear-gradient(180deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%)",
           boxShadow: "2px 0 8px rgba(0,0,0,0.15)",
         }}
       >
@@ -29,33 +30,43 @@ const MainLayout = () => {
         </div>
 
         <div className="px-3 pt-4">
-          <p className="text-indigo-300 text-xs uppercase tracking-widest px-3 mb-2 font-semibold">
-            Main Menu
-          </p>
-          <Menu
-            mode="inline"
-            selectedKeys={[location.pathname]}
-            style={{ background: "transparent", border: "none", color: "#c7d2fe" }}
-            items={[
-              {
-                key: "/",
-                icon: <AppstoreOutlined />,
-                label: "Dashboard",
-                onClick: () => navigate("/"),
+          <ConfigProvider
+            theme={{
+              components: {
+                Menu: {
+                  itemColor: "#c7d2fe",
+                  itemHoverColor: "#ffffff",
+                  itemSelectedColor: "#ffffff",
+                  itemBg: "transparent",
+                  itemHoverBg: "rgba(255,255,255,0.1)",
+                  itemSelectedBg: "rgba(255,255,255,0.15)",
+                },
               },
-              {
-                key: "/tasks",
-                icon: <CheckSquareOutlined />,
-                label: "Tasks",
-                onClick: () => navigate("/tasks"),
-              },
-            ]}
-          />
+            }}
+          >
+            <Menu
+              mode="inline"
+              selectedKeys={[location.pathname]}
+              style={{ border: "none" }}
+              items={[
+                {
+                  key: "/",
+                  icon: <AppstoreOutlined />,
+                  label: "Dashboard",
+                  onClick: () => navigate("/"),
+                },
+                {
+                  key: "/tasks",
+                  icon: <CheckSquareOutlined />,
+                  label: "Tasks",
+                  onClick: () => navigate("/tasks"),
+                },
+              ]}
+            />
+          </ConfigProvider>
         </div>
 
-        <div
-          className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 flex items-center gap-3"
-        >
+        <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10 flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-indigo-400 flex items-center justify-center">
             <UserOutlined style={{ color: "#fff", fontSize: 14 }} />
           </div>
@@ -75,9 +86,6 @@ const MainLayout = () => {
             <h2 className="m-0 text-xl font-bold text-gray-800">
               Task Management
             </h2>
-            <p className="m-0 text-gray-400 text-xs">
-              Manage and track your team's tasks
-            </p>
           </div>
         </Header>
 

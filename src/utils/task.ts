@@ -1,3 +1,12 @@
+export const STATUS_COLOR_MAP: Record<
+  string,
+  { dot: string; border: string; bg: string }
+> = {
+  todo: { dot: "#8c8c8c", border: "#fafafa", bg: "#fafafa" },
+  in_progress: { dot: "#1677ff", border: "#fafafa", bg: "#e6f4ff" },
+  done: { dot: "#52c41a", border: "#fafafa", bg: "#f6ffed" },
+};
+
 export const TASK_STATUS_OPTIONS = [
   {
     label: "Todo",
